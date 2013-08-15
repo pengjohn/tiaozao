@@ -1,4 +1,4 @@
 <?php
-  mysql_close($con);
+    mysql_close($con);
 ?>
    

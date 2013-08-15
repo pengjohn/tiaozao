@@ -34,18 +34,25 @@ while($row = mysql_fetch_array($result))
     echo $row['ItemDescribe']."<br>\n";
     echo "-----------------------------------------------<br>\n";
 }
+
+$result_book=mysql_query("SELECT * FROM ".SQL_TABLE_BOOK." WHERE BookItemId='$ItemId' ", $con);
+$num_rows_book = mysql_num_rows($result_book);
+if($num_rows_book >=1)
+{
+    $row_book = mysql_fetch_array($result_book);
+    echo "[".$row_book['BookTime']."][".$row_book['BookUserName']."]已经预定";
+}
+else
+{
 ?>
-
-<form method="POST" action="book_save.php">
-<input type="hidden" name=ItemId value=<?php echo $ItemId; ?>>
-<input type="text" name="ItemPrice" value="请出价"
-       size="10" style="width:300px;height:60px;font-size:40px"
-       onkeyup="this.value=this.value.replace(/\D/g,'') " 
-       onafterpaste ="this.value=this.value.replace(/\D/g,'')" 
-       onfocus="if(value=='请出价') {value=''}" onblur="if (value=='') {value='请出价'}" >
-<input type="submit" value=" 我要预订 " name="cmdok" style="width:300px;height:60px;font-size:40px">
-</form>
-
+    <form method="POST" action="book_save_normal.php">
+    <input type="hidden" name=ItemId value=<?php echo $ItemId; ?>>
+    <input type="submit" value=" 我要预订 " name="cmdok" style="width:300px;height:60px;font-size:40px">
+    </form>
+<?php
+}
+?>
+<br>-----------------------------------------------<br>
 <a href=index.php>返回</a>
 </body>
 </html>
