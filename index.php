@@ -36,10 +36,12 @@ else
     echo "用户:".$_SESSION['tz_re_UserAccount']."　　[<a href=user_logout.php>登出</a>]<br>";
     echo "id:".$_SESSION['tz_re_UserId']."<br>";
     echo "<a href=item_add.htm>添加商品</a><br>\n";
-
+    echo "<a href=item_list.php>我的商品</a><br>\n";
+    
     if($_SESSION['tz_re_UserLevel'] >=100)
     {
         echo "<a href=admin_category_add.php>添加分类</a><br>\n";
+        echo "<a href=admin_init.php>管理页面</a><br>\n";        
     }
 }
 ?>
@@ -59,31 +61,10 @@ while($row = mysql_fetch_array($result))
     }
     echo "[".date('m-d', strtotime($row['ItemTime']) )."]";
     
-    switch($row['ItemSellType'])
-    {
-        case SELL_TYPE_NORMAL:
-            $detailURL = "item_detail_normal.php";
-            break;
-        case SELL_TYPE_AUCTION_ENGLISH:
-            $detailURL = "item_detail.php";
-            break;
-        case SELL_TYPE_AUCTION_DUTCH:
-            $detailURL = "item_detail.php";
-            break;
-        case SELL_TYPE_AUCTION_SECRET_HIGH:
-            $detailURL = "item_detail.php";
-            break;
-        case SELL_TYPE_AUCTION_SECRET_CLOSEST:
-            $detailURL = "item_detail.php";
-            break;
-        default:
-            $mode2txt = "无";
-            break;
-    } 
-    echo "<a href=".$detailURL."?ItemId=".$row['ItemId'].">".$row['ItemName']."</a> [".type2txt($row['ItemSellType'])."]";
+    echo "<a href=".getSellTypeURL($row['ItemSellType'])."?ItemId=".$row['ItemId'].">".$row['ItemName']."</a> [".getSellType($row['ItemSellType'])."]";
     if($row['ItemClose']>=1)
     {
-        echo "<font color=red>[交易已经关闭]</font>";
+        echo "<font color=red>[".getItemClose($row['ItemClose'])."]</font>";
     }
     echo "<br>";
 }

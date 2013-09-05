@@ -1,4 +1,3 @@
-<?php include 'conn.php'; ?>
 <?php include 'conn_db_open.php'; ?>
 
 <html>
@@ -15,18 +14,6 @@ function new_fail_price()
 {
     alert("一口价不大于起拍价，添加失败！");
     history.back();
-}
-
-function edit_status_success()
-{
-    alert("状态修改成功！");
-    self.location='index.php';
-}
-
-function edit_status_fail_sold()
-{
-    alert("交易已完成，禁止修改状态！");
-    self.location='index.php';
 }
 
 function edit_success()
@@ -113,24 +100,14 @@ if($action == "new")
 }
 else if($action == "editStatus")
 {
-    echo "<br>goto editStatus";
-    $result=mysql_query("SELECT * FROM ".SQL_TABLE_ITEM." WHERE ItemId=".$ItemId." order by ItemId", $con);
-    $row = mysql_fetch_array($result);
-    if($row['ItemClose'] == ITEM_CLOSE_SOLD)
-    {
-        echo "<body onload=edit_status_fail_sold()>";
-        echo "</body>";
-    }
-    else
-    {
-        $sql = "UPDATE ".SQL_TABLE_ITEM."
-                Set ItemClose='$ItemClose' 
-                WHERE ItemId='$ItemId'";
-        mysql_query($sql, $con);
-        echo "<br>sql: ".mysql_error();
-        echo "<body onload=edit_status_success()>";
-        echo "</body>";
-    }
+    echo "<br>goto edit";
+    $sql = "UPDATE ".SQL_TABLE_ITEM."
+            Set ItemClose='$ItemClose' 
+            WHERE ItemId='$ItemId'";
+    mysql_query($sql, $con);
+    echo "<br>sql: ".mysql_error();
+    echo "<body onload=edit_success()>";
+    echo "</body>";
 }
 else if($action == "edit")
 {
@@ -182,8 +159,12 @@ function upload_photo()
     $type=array("jpg","gif","bmp","jpeg","png");//设置允许上传文件的类型
    
     echo "[".$_FILES['file']['name']."]";
+    if($_FILES['file']['name']==NULL)
+    {
+        echo "无图片<br>\n";
+    }
     //判断文件类型
-    if(!in_array(strtolower(fileext($_FILES['file']['name'])),$type))
+    else if(!in_array(strtolower(fileext($_FILES['file']['name'])),$type))
     {
         $text=implode(",",$type);
         echo "您只能上传以下类型文件: ",$text,"<br>";

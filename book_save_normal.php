@@ -50,6 +50,13 @@ function book_sold()
         $sql = "INSERT INTO ".SQL_TABLE_BOOK." (BookId, BookItemId, BookUserId, BookUserName, BookTime) VALUES (NULL, '$BookItemId', '$BookUserId', '$BookUserName', NOW())";
         mysql_query($sql, $con);
         echo "<br>sql: ".mysql_error();
+
+        $sql = "UPDATE ".SQL_TABLE_ITEM."
+                SET ItemClose=".ITEM_CLOSE_SOLD." 
+                WHERE ItemId='$BookItemId'";
+        mysql_query($sql, $con);
+        echo "<br>sql: ".mysql_error();
+                
         echo "<body onload=book_success()>";
         echo "</body>";
     }        

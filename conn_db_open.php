@@ -1,7 +1,7 @@
 <?php
 define("SQL_SERVER","192.168.0.196");
 define("SQL_USER","pengjohn");
-define("SQL_PWD","gozone");
+define("SQL_PWD","xxxxxx");
 define("SQL_DB","pengjohn");
 
 define("SQL_TABLE_USER","tz_re_user");

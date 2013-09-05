@@ -29,7 +29,10 @@ while($row = mysql_fetch_array($result))
     echo "发布日期:".$row['ItemTime']."<br>\n";
     echo "卖家:".$row['ItemSeller']."<br>\n";
     echo "-----------------------------------------------<br>\n";
-    echo "<img src=".$row['ItemPhoto']." border=0 height=480>\n";
+    if($row['ItemPhoto'] != null)
+    {
+       echo "<img src=".$row['ItemPhoto']." border=0 height=480>\n";
+    }
     echo "<br><br>\n";
     echo $row['ItemDescribe']."<br>\n";
     echo "-----------------------------------------------<br>\n";
@@ -46,7 +49,8 @@ while($row = mysql_fetch_array($result))
 <input type="submit" value=" 我要预订 " name="cmdok" style="width:300px;height:60px;font-size:40px">
 </form>
 
-<a href=index.php>返回</a>
+<br>-----------------------------------------------<br>
+<a href=index.php>返回首页</a>
 </body>
 </html>
 <?php include 'conn_db_close.php'; ?>

@@ -11,7 +11,7 @@
 
 <body>
 <br>管理 -> 商品 -> 添加<br><br><br>
-<form method="POST" action="item_save.php" enctype="multipart/form-data">
+<form method="POST" action="item_save_normal.php" enctype="multipart/form-data">
 <input type="hidden" name=action value="new">
 <input type="hidden" name=ItemSellType value="0">
     <table border="0" cellspacing="1" width=800>

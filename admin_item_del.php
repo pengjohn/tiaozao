@@ -7,20 +7,20 @@
 function del_success()
 {
     alert("É¾³ý³É¹¦£¡");
-    self.location='admin_item_add.php';
+    self.location='admin_init.php';
 }
 
 function del_fail()
 {
     alert("É¾³ýÊ§°Ü£¡");
-    self.location='admin_item_add.php';
+    self.location='admin_init.php';
 }
 </Script>
 </Head>
 <?php
-    $itemid = $_GET['itemid'];
+    $ItemId = $_GET['ItemId'];
  
-    $sql = "DELETE FROM item WHERE itemid='$itemid'";
+    $sql = "DELETE FROM ".SQL_TABLE_ITEM." WHERE ItemId='$ItemId'";
     mysql_query($sql, $con);
     echo "sql: ".mysql_error()."<br>";
     echo "<br>delete success!<br>";

@@ -41,11 +41,11 @@
             <td align="right" height="30">交易类型：</td>
             <td height="30">
                 <select name="ItemSellType" size="1">
-                    <option value=0><?php echo type2txt(0); ?></option>             
-                    <option value=1><?php echo type2txt(1); ?></option>
-                    <option value=2><?php echo type2txt(2); ?></option>
-                    <option value=3><?php echo type2txt(3); ?></option>
-                    <option value=4><?php echo type2txt(4); ?></option>
+                    <option value=0><?php echo getSellType(0); ?></option>             
+                    <option value=1><?php echo getSellType(1); ?></option>
+                    <option value=2><?php echo getSellType(2); ?></option>
+                    <option value=3><?php echo getSellType(3); ?></option>
+                    <option value=4><?php echo getSellType(4); ?></option>
                 </select>
             </td>
         </tr>
@@ -103,6 +103,27 @@
         </tr>
     </table>
 </form>
+<br>-----------------------------------------------<br>
+<?php
+$result=mysql_query("SELECT * FROM ".SQL_TABLE_CATEGORY.", ".SQL_TABLE_ITEM." 
+                              WHERE ".SQL_TABLE_CATEGORY.".CategoryId=".SQL_TABLE_ITEM.".ItemCategory 
+                              order by CategoryId, ItemTime desc", $con);
+
+$CategoryId = -1;
+while($row = mysql_fetch_array($result))
+{
+	 if($row['CategoryId'] != $CategoryId)
+	 {
+	 	$CategoryId = $row['CategoryId'];
+	 	echo "<br>-----------------------[".$row['CategoryName']."]-----------------------<br>";
+	 }
+	 echo "[<a href=admin_item_edit.php?ItemId=".$row['ItemId'].">修改</a>]";
+	 echo "[<a href=admin_item_del.php?ItemId=".$row['ItemId'].">删除</a>]";
+	 echo $row['ItemName'];
+	 echo "[".date('m-d', strtotime($row['ItemTime']) )."]";
+	 echo "<br>";
+}
+?>
 <br>-----------------------------------------------<br>
 <a href=index.php>返回首页</a>
 

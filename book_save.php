@@ -25,11 +25,11 @@ function book_sold()
 </Head>
 <?php
 session_start();
-$BookUseruserId = $_SESSION['tz_re_UserId'];
+$BookUserId = $_SESSION['tz_re_UserId'];
 $BookUserName = $_SESSION['tz_re_UserAccount'];
 $BookItemId = $_GET['ItemId'];
 
-if($userid <=0)
+if($BookUserId <=0)
 {
     echo "<body onload=book_please_login()>";
     echo "</body>";     

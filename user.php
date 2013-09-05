@@ -29,7 +29,7 @@ if($_SESSION['tz_re_UserAccount'] =="")
         </tr>
         <tr>
             <td align="right"><a href=user_register.php>注册</a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><input type="submit" value=" 登 录 " name="cmdok"style="background-color: rgb(0,0,0); color: rgb(255,255,255); border: 1px dotted rgb(255,255,255)"></td>
+            <td><input type="submit" value=" 登 录 " name="cmdok"></td>
         </tr>
     </table>
 </div>
